@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const user = require('./users_model.js');
+const user = require('/Users/C/Desktop/node-auth1-project/users/user_model.js');
 const express = require('express')
 
 
@@ -11,7 +11,7 @@ router.get('/', ( res) => {
     .catch(err => {
         console.log({err})
         res.status(500).json({
-            message: err.message
+            message: "fail to get"
         })
     })
 })
@@ -28,5 +28,19 @@ function restricted(req, res, next) {
         })
     }
 }
+
+
+router.get('/', ( res) => {
+    user.getAllUsers()
+    .then(gotAll => {
+        res.status(200).json(gotAll)
+    })
+    .catch(err => {
+        console.log({err})
+        res.status(500).json({
+            message: "fail to get"
+        })
+    })
+})
 
 module.exports = router
